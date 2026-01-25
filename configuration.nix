@@ -6,13 +6,38 @@
       ./hardware-configuration.nix
     ];
 
-  boot.loader.systemd-boot.enable = true;
-  boot.loader.efi.canTouchEfiVariables = true;
+  #boot.loader.systemd-boot.enable = true;
+  #boot.loader.efi.canTouchEfiVariables = true;
+
+  boot.loader = {
+    efi = {
+      canTouchEfiVariables = true;
+    };
+    limine = {
+      enable = true;
+      secureBoot.enable = true;
+    };
+  };
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
 
   time.timeZone = "Europe/London";
+
+  # Select internationalisation properties.
+  i18n.defaultLocale = "en_GB.UTF-8";
+
+  i18n.extraLocaleSettings = {
+    LC_ADDRESS = "en_GB.UTF-8";
+    LC_IDENTIFICATION = "en_GB.UTF-8";
+    LC_MEASUREMENT = "en_GB.UTF-8";
+    LC_MONETARY = "en_GB.UTF-8";
+    LC_NAME = "en_GB.UTF-8";
+    LC_NUMERIC = "en_GB.UTF-8";
+    LC_PAPER = "en_GB.UTF-8";
+    LC_TELEPHONE = "en_GB.UTF-8";
+    LC_TIME = "en_GB.UTF-8";
+  };
 
   services.getty.autologinUser = "ethan";
 
@@ -21,6 +46,8 @@
     xwayland.enable = true;
     withUWSM = true;
   };
+
+  console.keyMap = "uk";
 
   services.printing.enable = true;
 
@@ -37,7 +64,7 @@
 
   users.users.ethan = {
     isNormalUser = true;
-    extraGroups = [ "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" ];
     packages = with pkgs; [
       tree
     ];
@@ -56,7 +83,17 @@
     git
     hyprpaper
     nautilus
+    pavucontrol
+    sbctl # for limine
   ];
+
+  # Fix Driver Errors
+  hardware.graphics.enable = true;
+  services.xserver.videoDrivers = [ "nvidia" ];
+  hardware.nvidia.open = true;
+  hardware.nvidia.modesetting.enable = true;
+
+  nixpkgs.config.allowUnfree = true;
 
   services.openssh.enable = true;
 
