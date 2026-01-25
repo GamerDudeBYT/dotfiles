@@ -76,6 +76,12 @@
     ];
   };
 
+  programs._1password.enable = true;
+  programs._1password-gui = {
+    enable = true;
+    polkitPolicyOwners = [ "ethan" ];
+  };
+
   programs.firefox.enable = true;
 
   programs.fish.enable = true;
@@ -91,6 +97,10 @@
     nautilus
     pavucontrol
     sbctl # for limine
+  ];
+
+  fonts.packages = with pkgs; [
+    nerd-fonts.hurmit
   ];
 
   # Fix Driver Errors
