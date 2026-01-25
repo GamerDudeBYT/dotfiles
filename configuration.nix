@@ -6,22 +6,26 @@
       ./hardware-configuration.nix
     ];
 
-  #boot.loader.systemd-boot.enable = true;
-  #boot.loader.efi.canTouchEfiVariables = true;
+  boot = {
+    loader.systemd-boot.enable = lib.mkForce false;
+    loader.grub.enable = lib.mkForce false;
 
-  boot.loader = {
-    efi = {
-      canTouchEfiVariables = true;
-    };
-    limine = {
+    loader.efi.canTouchEfiVariables = true;
+    
+    loader.limine = {
       enable = true;
-      efiSupport = true;
-      secureBoot.enable = true;
-      extraEntries = ''
-        \Windows
-	  protocol: efi
-	  path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
-      '';
+      #efiSupport = true;
+      secureBoot.enable = false;
+      #extraEntries = ''
+      #  \Windows
+      #   protocol: efi
+      #   path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+      #'';
+      style = {
+        wallpapers = [
+          ./wallpapers/NixOS/NixOS-Dark.png
+	];
+      };
     };
   };
 
