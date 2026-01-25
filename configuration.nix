@@ -15,7 +15,13 @@
     };
     limine = {
       enable = true;
+      efiSupport = true;
       secureBoot.enable = true;
+      extraEntries = ''
+        \Windows
+	  protocol: efi
+	  path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
+      '';
     };
   };
 
