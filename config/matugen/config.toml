@@ -1,0 +1,20 @@
+[config.wallpaper]
+set = false
+command = "swww img --transition-type center {{ image }}"
+
+[templates.hyprland]
+input_path = '~/.config/matugen/templates/hyprland-colors.conf'
+output_path = '~/.config/hypr/colors.conf'
+
+[templates.wezterm]
+input_path = '~/.config/matugen/templates/wezterm_theme.toml'
+output_path = '~/.config/wezterm/matugen_theme.toml'
+
+[templates.rofi]
+input_path = '~/.config/matugen/templates/rofi-colors.rasi'
+output_path = '~/.config/rofi/colors.rasi'
+
+[templates.waybar]
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/waybar/colors.css'
+post_hook = 'pkill waybar; waybar &'

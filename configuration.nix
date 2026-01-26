@@ -7,6 +7,15 @@
     ];
 
   boot = {
+    extraModulePackages = with config.boot.kernelPackages; [
+      v4l2loopback.out
+    ];
+
+    kernelModules = [ "v4l2loopback" "snd-aloop" ];
+    extraModprobeConfig = ''
+      options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
+    '';
+
     loader.systemd-boot.enable = lib.mkForce false;
     loader.grub.enable = lib.mkForce false;
 
@@ -31,6 +40,8 @@
 
   networking.hostName = "nixos"; # Define your hostname.
   networking.networkmanager.enable = true;
+
+  networking.firewall.enable = false;
 
   time.timeZone = "Europe/London";
 
@@ -89,6 +100,8 @@
   programs.firefox.enable = true;
 
   programs.fish.enable = true;
+
+  programs.droidcam.enable = true;
   
   environment.systemPackages = with pkgs; [
     vim
@@ -98,9 +111,15 @@
     waybar
     git
     hyprpaper
+    hyprpicker
     nautilus
     pavucontrol
-    sbctl # for limine
+    sbctl
+    matugen
+    swww
+    vscode
+    nwg-look
+    rofi
   ];
 
   fonts.packages = with pkgs; [

@@ -8,6 +8,8 @@ let
     waybar = "waybar";
     wezterm = "wezterm";
     quickshell = "quickshell";
+    matugen = "matugen";
+    rofi = "rofi";
   };
 in
 {
