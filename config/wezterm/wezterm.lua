@@ -1,8 +1,10 @@
-local wezterm = require 'wezterm'
+local wezterm = require('wezterm')
 
 local config = wezterm.config_builder()
 
 config.enable_tab_bar = false
+
+config.color_scheme_dirs = { '~/.config/wezterm' }
 
 config.color_scheme = "matugen_theme"
 

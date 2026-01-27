@@ -17,7 +17,7 @@
     '';
 
     loader.systemd-boot.enable = lib.mkForce false;
-    loader.grub.enable = lib.mkForce false;
+    loader.grub.enable = lib.mkForce false;    
 
     loader.efi.canTouchEfiVariables = true;
     
@@ -25,11 +25,11 @@
       enable = true;
       #efiSupport = true;
       secureBoot.enable = false;
-      #extraEntries = ''
-      #  \Windows
-      #   protocol: efi
-      #   path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
-      #'';
+      extraEntries = ''
+        /Windows 11
+         protocol: efi
+         path: uuid(c9618cff-49a7-422f-949a-2ea48b87b2fe):/EFI/Microsoft/Boot/bootmgfw.efi
+      '';
       style = {
         wallpapers = [
           ./wallpapers/NixOS/NixOS-Dark.png
@@ -120,6 +120,7 @@
     vscode
     nwg-look
     rofi
+    teams-for-linux
   ];
 
   fonts.packages = with pkgs; [

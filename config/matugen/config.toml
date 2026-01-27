@@ -9,6 +9,7 @@ output_path = '~/.config/hypr/colors.conf'
 [templates.wezterm]
 input_path = '~/.config/matugen/templates/wezterm_theme.toml'
 output_path = '~/.config/wezterm/matugen_theme.toml'
+post_hook = 'touch ~/.config/wezterm/wezterm.lua'
 
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'
@@ -17,4 +18,4 @@ output_path = '~/.config/rofi/colors.rasi'
 [templates.waybar]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
-post_hook = 'pkill waybar; waybar &'
+post_hook = 'pkill waybar; waybar & disown'
