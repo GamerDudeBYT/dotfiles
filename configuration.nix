@@ -125,6 +125,8 @@
     cliphist
     clipman
     wl-clip-persist
+    davinci-resolve
+    godot
   ];
 
   fonts.packages = with pkgs; [
