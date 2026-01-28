@@ -10,6 +10,7 @@ let
     quickshell = "quickshell";
     matugen = "matugen";
     rofi = "rofi";
+    swaync = "swaync";
   };
 in
 {
@@ -33,15 +34,24 @@ in
 
   home.packages = with pkgs; [
     (pkgs.writeShellApplication {
-      name = "ns";
-      runtimeInputs = with pkgs; [
-        fzf
-        (nix-search-tv.overrideAttrs {
-          env.GOEXPERIMENT = "jsonv2";
-        })
-      ];
-      text = ''exec "${pkgs.nix-search-tv.src}/nixpkgs.sh" "$@"'';
+        name = "ns";
+        runtimeInputs = with pkgs; [
+            fzf
+            (nix-search-tv.overrideAttrs {
+            env.GOEXPERIMENT = "jsonv2";
+            })
+        ];
+        text = ''exec "${pkgs.nix-search-tv.src}/nixpkgs.sh" "$@"'';
     })
+
+    (pkgs.writeShellApplication {
+        name = "wallset";
+        runtimeInputs = [ pkgs.matugen pkgs.swww ];
+        text = ''
+            matugen image "$1"
+        '';
+    })
+
 
     quickshell
 
@@ -51,6 +61,7 @@ in
     enable = true;
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
+      wallset = "";
     };
   };
 

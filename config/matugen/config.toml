@@ -1,6 +1,7 @@
 [config.wallpaper]
-set = false
-command = "swww img --transition-type center {{ image }}"
+set = true
+command = "swww"
+arguments = ["img", "--transition-type", "center", "--transition-fps", "60"]
 
 [templates.hyprland]
 input_path = '~/.config/matugen/templates/hyprland-colors.conf'
@@ -19,3 +20,8 @@ output_path = '~/.config/rofi/colors.rasi'
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
 post_hook = 'pkill waybar; waybar & disown'
+
+[templates.swaync]
+input_path = '~/.config/matugen/templates/colors.css'
+output_path = '~/.config/swaync/colors.css'
+post_hook = "swaync-client -rs"

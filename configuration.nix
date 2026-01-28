@@ -121,6 +121,8 @@
     nwg-look
     rofi
     teams-for-linux
+    swaynotificationcenter
+    libnotify
   ];
 
   fonts.packages = with pkgs; [
