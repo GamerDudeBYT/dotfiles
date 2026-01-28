@@ -110,7 +110,6 @@
     kitty
     waybar
     git
-    hyprpaper
     hyprpicker
     nautilus
     pavucontrol
@@ -123,6 +122,9 @@
     teams-for-linux
     swaynotificationcenter
     libnotify
+    cliphist
+    clipman
+    wl-clip-persist
   ];
 
   fonts.packages = with pkgs; [
