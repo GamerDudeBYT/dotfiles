@@ -49,6 +49,7 @@ in
         runtimeInputs = [ pkgs.matugen pkgs.swww ];
         text = ''
             matugen image "$1"
+            notify-send "Wallpaper Changed" "$1"
         '';
     })
 
@@ -61,7 +62,6 @@ in
     enable = true;
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
-      wallset = "";
     };
   };
 

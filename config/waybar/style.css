@@ -57,3 +57,11 @@ tooltip label {
     background-color: @on_primary;
     color: @primary;
 }
+
+#custom-notification {
+    margin: 0px 15px 0px 5px;
+}
+
+#custom-notification:hover {
+    background-color: @on_secondary;
+}
