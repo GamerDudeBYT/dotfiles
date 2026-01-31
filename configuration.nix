@@ -105,6 +105,7 @@
     alsa.enable = true;
     alsa.support32Bit = true;
     pulse.enable = true;
+    # https://gitlab.freedesktop.org/pipewire/pipewire/-/blob/master/src/daemon/filter-chain/sink-virtual-surround-7.1-hesuvi.conf
     extraConfig.pipewire."99-extra-config" = ''
 context.modules = [
     { name = libpipewire-module-filter-chain
