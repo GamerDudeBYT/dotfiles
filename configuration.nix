@@ -25,6 +25,8 @@
       enable = true;
       #efiSupport = true;
       secureBoot.enable = false;
+      validateChecksums = false;
+      panicOnChecksumMismatch = false;
       extraEntries = ''
         /Windows 11
          protocol: efi
@@ -91,6 +93,10 @@
     ];
   };
 
+  hardware.bluetooth.enable = true;
+
+  services.blueman.enable = true;
+
   programs._1password.enable = true;
   programs._1password-gui = {
     enable = true;
@@ -102,6 +108,8 @@
   programs.fish.enable = true;
 
   programs.droidcam.enable = true;
+
+  programs.steam.enable = true;
   
   environment.systemPackages = with pkgs; [
     vim
@@ -125,8 +133,23 @@
     cliphist
     clipman
     wl-clip-persist
+    nwg-clipman
     davinci-resolve
     godot
+    brightnessctl
+    bluez
+    bluez-tools
+    libreoffice
+    spotify
+    glib
+    gtk3
+    gtk4
+    gsettings-desktop-schemas
+    discord
+    flatpak
+    rofi-bluetooth
+    kdePackages.dolphin
+    quickshell
   ];
 
   fonts.packages = with pkgs; [

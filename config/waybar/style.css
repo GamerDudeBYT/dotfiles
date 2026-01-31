@@ -25,7 +25,6 @@ tooltip label {
 #window {
     background: @on_primary;
     padding: 5px 15px;
-    border-radius: 100px;
     margin: 10px 7px;
     color: @primary;
 }
@@ -50,18 +49,26 @@ tooltip label {
 #clock,
 #battery,
 #pulseaudio,
-#network {
-    padding: 5px 15px;
+#network,
+#bluetooth {
+    padding: 5px 10px;
     margin: 10px 7px;
-    border-radius: 100px;
     background-color: @on_primary;
     color: @primary;
 }
 
 #custom-notification {
-    margin: 0px 15px 0px 5px;
+    padding: 0px 15px 0px 5px;
 }
 
 #custom-notification:hover {
     background-color: @on_secondary;
+}
+
+#custom-distro {
+    padding: 5px 15px;
+}
+
+#custom-left_div.1 {
+    color: @tertiary;
 }

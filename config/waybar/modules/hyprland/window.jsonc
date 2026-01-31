@@ -1,0 +1,11 @@
+{
+    "hyprland/window": {
+        "format": "{}",
+        "rewrite": {
+            "": "Desktop",
+            "(.*) — Mozilla Firefox": "🌎 $1",
+            "~": ">_",
+        },
+        "separate-outputs": true,
+    },
+}

@@ -11,6 +11,8 @@ let
     matugen = "matugen";
     rofi = "rofi";
     swaync = "swaync";
+    gtk3 = "gtk-3.0";
+    gtk4 = "gtk-4.0";
   };
 in
 {
