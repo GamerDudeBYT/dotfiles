@@ -283,6 +283,8 @@ context.modules = [
     usbutils
     
     easyeffects
+
+    chocolate-doom # DOOM!
   ];
 
   fonts.packages = with pkgs; [
