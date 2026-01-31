@@ -9,6 +9,7 @@ configuration {
     drun-display-format: "{name}";
     modi: "drun,window,run,emoji:rofimoji -a copy --clipboarder wl-copy";
     show-icons: true;
+    run-shell-command: "fish -l -c '{cmd}'";
 }
 
 window {
