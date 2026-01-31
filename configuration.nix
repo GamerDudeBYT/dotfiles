@@ -290,7 +290,6 @@ context.modules = [
   ];
 
   # Razer devices
-
   hardware.openrazer = {
     enable = true;
   };
