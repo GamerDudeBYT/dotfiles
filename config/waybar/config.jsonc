@@ -15,7 +15,6 @@
         "clock#time",
         "clock#date",
         "bluetooth",
-        "custom/left_div#1",
         "custom/notification",
     ],
 

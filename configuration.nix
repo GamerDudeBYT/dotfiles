@@ -6,6 +6,8 @@
       ./hardware-configuration.nix
     ];
 
+  system.nixos.label = "NixOS";
+
   boot = {
     extraModulePackages = with config.boot.kernelPackages; [
       v4l2loopback.out
@@ -21,23 +23,45 @@
 
     loader.efi.canTouchEfiVariables = true;
     
-    loader.limine = {
-      enable = true;
-      #efiSupport = true;
-      secureBoot.enable = false;
-      validateChecksums = false;
-      panicOnChecksumMismatch = false;
-      extraEntries = ''
-        /Windows 11
-         protocol: efi
-         path: uuid(c9618cff-49a7-422f-949a-2ea48b87b2fe):/EFI/Microsoft/Boot/bootmgfw.efi
-      '';
-      style = {
-        wallpapers = [
-          ./wallpapers/NixOS/NixOS-Dark.png
-	];
-      };
+    lanzaboote = {
+        enable = true;
+        pkiBundle = "/var/lib/sbctl";
     };
+    #loader.limine = {
+    #  enable = false;
+    #  #efiSupport = true;
+    #  secureBoot.enable = false;
+    #  extraEntries = ''
+    #    /Windows 11
+    #     protocol: efi
+    #     path: uuid(c9618cff-49a7-422f-949a-2ea48b87b2fe):/EFI/Microsoft/Boot/bootmgfw.efi
+    #  '';
+    #  style = {
+    #    wallpapers = [
+    #      ./wallpapers/NixOS/NixOS-Dark.png
+    #    ];
+    #  };
+    #};
+
+    plymouth = {
+        enable = true;
+        theme = "hexa_retro";
+        themePackages = with pkgs; [
+            (adi1090x-plymouth-themes.override {
+                selected_themes = [ "hexa_retro" ];
+            })
+        ];
+    };
+
+    consoleLogLevel = 3;
+    initrd.verbose = false;
+    kernelParams = [
+      "quiet"
+      "udev.log_level=3"
+      "systemd.show_status=auto"
+    ];
+
+
   };
 
   networking.hostName = "nixos"; # Define your hostname.
@@ -69,7 +93,7 @@
     xwayland.enable = true;
     withUWSM = true;
   };
-
+  
   console.keyMap = "uk";
 
   services.printing.enable = true;
@@ -130,6 +154,7 @@
     teams-for-linux
     swaynotificationcenter
     libnotify
+    wl-clipboard
     cliphist
     clipman
     wl-clip-persist
@@ -150,6 +175,11 @@
     rofi-bluetooth
     kdePackages.dolphin
     quickshell
+    btop
+    whatsapp-electron
+    rofimoji
+    rofi-calc
+    efibootmgr
   ];
 
   fonts.packages = with pkgs; [

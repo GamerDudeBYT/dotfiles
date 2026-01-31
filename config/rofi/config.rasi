@@ -1,5 +1,199 @@
 @import "colors.rasi"
+@import "fonts.rasi"
 
-* {
-    background-color: @primary-container;
+configuration {
+    display-drun: "";
+    display-window: "";
+    display-run: "";
+    display-emoji: "";
+    drun-display-format: "{name}";
+    modi: "drun,window,run,emoji:rofimoji -a copy --clipboarder wl-copy";
+    show-icons: true;
+}
+
+window {
+    transparency: "real";
+    location: center;
+    anchor: center;
+    fullscreen: false;
+    width: 40%;
+    x-offset: 0px;
+    y-offset: 0px;
+
+    enabled: true;
+    margin: 0px;
+    padding: 0px;
+    border: 2px solid;
+    border-radius: 0px;
+    border-color: @outline-variant;
+    cursor: "default";
+    background-color: @surface;
+}
+
+mainbox {
+    enabled: true;
+    spacing: 10px;
+    margin: 0px;
+    padding: 30px;
+    background-color: transparent;
+    children: [ "inputbar", "message", "listview", "mode-switcher"];
+}
+
+inputbar {
+    enabled: true;
+    spacing: 10px;
+    margin: 0px;
+    padding: 10px;
+    border: 2px;
+    border-radius: 0px;
+    border-color: @outline;
+    background-color: @on-primary;
+    text-color: @primary;
+    children: [ "textbox-prompt-colon", "entry"];
+}
+
+prompt {
+    enabled: true;
+    background-color: inherit;
+    text-color: inherit;
+}
+
+textbox-prompt-colon {
+    enabled: true;
+    padding: 0px;
+    expand: false;
+    str: "";
+    background-color: inherit;
+    text-color: inherit;
+}
+
+entry {
+    enabled: true;
+    padding: 0px;
+    background-color: inherit;
+    text-color: inherit;
+    cursor: text;
+    placeholder: "Search...";
+    placeholder-color: inherit;
+}
+
+listview {
+    enabled: true;
+    columns: 2;
+    lines: 10;
+    cycle: true;
+    dynamic: true;
+    scrollbar: true;
+    layout: vertical;
+    reverse: false;
+    fixed-height: true;
+    fixed-columns: true;
+    spacing: 5px;
+    background-color: transparent;
+    text-color: @secondary;
+    cursor: "default";
+}
+
+scrollbar {
+    handle-width: 5px;
+    handle-color: @on-primary-fixed-variant;
+    border-radius: 0px;
+    background-color: @inverse-on-surface;
+}
+element normal.normal,
+element alternate.normal {
+    background-color: @on-primary-fixed;
+    text-color: @primary;
+}
+
+element normal.urgent,
+element alternate.urgent,
+element selected.active {
+    background-color: @on-primary-fixed;
+    text-color: @primary;
+    border: 2px;
+    border-radius: 0px;
+    border-color: @outline;
+}
+
+element normal.active,
+element alternate.active,
+element selected.urgent {
+    background-color: @on-primary-fixed;
+    text-color: @primary;
+    border: 2px;
+    border-radius: 0px;
+    border-color: @surface-container-highest;
+}
+
+element selected.normal {
+    background-color: @on-primary-fixed-variant;
+    text-color: @primary-fixed;
+    border: 2px;
+}
+
+element-icon {
+    background-color: transparent;
+    text-color: inherit;
+    size: 24px;
+    cursor: inherit;
+}
+
+element-text {
+    background-color: transparent;
+    text-color: inherit;
+    highlight: inherit;
+    cursor: inherit;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+}
+
+mode-switcher {
+    enabled: true;
+    spacing: 10px;
+    margin: 0px;
+    background-color: transparent;
+    text-color: @primary;
+}
+
+button {
+    padding: 10px;
+    border-radius: 0px;
+    background-color: @on-secondary-fixed-variant;
+    text-color: inherit;
+    cursor: pointer;
+}
+
+button selected {
+    backgound-color: @secondary-container;
+    text-color: @primary;
+    border: 2px;
+    border-radius: 0px;
+    border-color: @outline;
+}
+
+message {
+    enabled: true;
+    margin: 0px;
+    padding: 10px;
+    border-radius: 0px;
+    background-color: @on-secondary-fixed-variant;
+    text-color: @primary;
+}
+
+textbox {
+    background-color: transparent;
+    text-color: @primary;
+    vertical-align: 0.5;
+    horizontal-align: 0.0;
+    highlight: none;
+    placeholder-color: @primary;
+    blink: true;
+    markup: true;
+}
+
+error-message {
+    padding: 30px;
+    background-color: @surface;
+    text-color: @primary;
 }
