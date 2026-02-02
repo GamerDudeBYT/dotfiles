@@ -234,7 +234,10 @@ context.modules = [
 
   programs.droidcam.enable = true;
 
-  programs.steam.enable = true;
+  programs.steam = {
+    enable = true;
+    extest.enable = true;
+  };
   
   environment.systemPackages = with pkgs; [
     vim
@@ -306,6 +309,8 @@ context.modules = [
   nixpkgs.config.allowUnfree = true;
 
   services.openssh.enable = true;
+
+  services.power-profiles-daemon.enable = true;
 
   nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
 

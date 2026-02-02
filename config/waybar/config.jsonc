@@ -12,8 +12,7 @@
         "network",
         "pulseaudio",
         "battery",
-        "clock#time",
-        "clock#date",
+        "clock",
         "bluetooth",
         "custom/notification",
     ],
@@ -57,16 +56,10 @@
         },
     },
 
-    "clock#time": {
+    "clock": {
         "format": "{:%H:%M}",
         "format-alt": "{:%a, %d. %b  %H:%M}",
-        "tooltip-format": "<b>Standard Time</b>: <span text_transform='lowercase'>{:%I:%M %p}</span>",
-    },
-
-    "clock#date": {
-        "format": "󰸗 {:%d-%m-%y}",
-        "min-length": 8,
-        "max-length": 8,
+        //"tooltip-format": "<b>Standard Time</b>: <span text_transform='lowercase'>{:%I:%M %p}</span>",
         "tooltip-format": "{calendar}",
         "calendar": {
             "mode": "month",

@@ -1,6 +1,4 @@
-import QuickShell
+import Quickshell
 import QtQuick
 
-Colors{
-    id: colors
-}
+import "colors.qml" as Colors
