@@ -14,6 +14,7 @@ let
     gtk3 = "gtk-3.0";
     gtk4 = "gtk-4.0";
     btop = "btop";
+    satty = "satty";
   };
 in
 {
@@ -66,18 +67,13 @@ in
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
       nrsi = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos --install-bootloader";
+      nrsu = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos --upgrade";
     };
   };
 
   programs.wezterm = {
     enable = true;
   };
-
-
-  programs.hyprshot = {
-    enable = true;
-  };
-
 
   xdg.configFile = builtins.mapAttrs
     (name: subpath: {

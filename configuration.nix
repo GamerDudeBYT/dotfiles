@@ -1,4 +1,4 @@
-{ config, lib, pkgs, ... }:
+{ config, lib, pkgs, unstable, ... }:
 
 {
   imports =
@@ -17,7 +17,7 @@
     extraModprobeConfig = ''
       options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
     '';
-
+    
     loader.systemd-boot.enable = lib.mkForce false;
     loader.grub.enable = lib.mkForce false;    
 
@@ -26,6 +26,11 @@
     lanzaboote = {
         enable = true;
         pkiBundle = "/var/lib/sbctl";
+
+        autoGenerateKeys.enable = true;
+        autoEnrollKeys = {
+          enable = true;
+        };
     };
     #loader.limine = {
     #  enable = false;
@@ -92,6 +97,10 @@
     enable = true;
     xwayland.enable = true;
     withUWSM = true;
+  };
+
+  programs.hyprlock = {
+    enable = true;
   };
   
   console.keyMap = "uk";
@@ -252,7 +261,9 @@ context.modules = [
     sbctl
     matugen
     swww
-    vscode
+
+    unstable.vscode
+
     nwg-look
     rofi
     teams-for-linux
@@ -264,7 +275,6 @@ context.modules = [
     wl-clip-persist
     nwg-clipman
     davinci-resolve
-    godot
     brightnessctl
     bluez
     bluez-tools
@@ -289,6 +299,21 @@ context.modules = [
     easyeffects
 
     chocolate-doom # DOOM!
+
+    satty # image editing
+
+    hyprshot # screenshots
+
+    networkmanagerapplet
+
+    networkmanager_dmenu
+
+    godotPackages_4_6.godot # godot 4.6
+
+    imagemagick # Image tools
+
+    subfinder
+
   ];
 
   fonts.packages = with pkgs; [
