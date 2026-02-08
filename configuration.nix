@@ -321,7 +321,7 @@ context.modules = [
     
     gcc # c and c++
 
-    conda # python manager
+    uv # python manager
 
   ];
 
