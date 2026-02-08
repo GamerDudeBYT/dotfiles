@@ -316,6 +316,13 @@ context.modules = [
 
     asciiquarium
 
+    onedrive
+    onedrivegui
+    
+    gcc # c and c++
+
+    conda # python manager
+
   ];
 
   fonts.packages = with pkgs; [
@@ -334,8 +341,6 @@ context.modules = [
   hardware.nvidia.modesetting.enable = true;
 
   nixpkgs.config.allowUnfree = true;
-
-  services.onedrive.enable = true;
 
   services.openssh.enable = true;
 
