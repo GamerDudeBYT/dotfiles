@@ -19,12 +19,14 @@
     '';
     
     loader.systemd-boot.enable = lib.mkForce false;
+
+    
     loader.grub.enable = lib.mkForce false;    
 
     loader.efi.canTouchEfiVariables = true;
     
     lanzaboote = {
-        enable = true;
+        enable = false;
         pkiBundle = "/var/lib/sbctl";
 
         autoGenerateKeys.enable = true;
@@ -32,21 +34,22 @@
           enable = true;
         };
     };
-    #loader.limine = {
-    #  enable = false;
-    #  #efiSupport = true;
-    #  secureBoot.enable = false;
-    #  extraEntries = ''
-    #    /Windows 11
-    #     protocol: efi
-    #     path: uuid(c9618cff-49a7-422f-949a-2ea48b87b2fe):/EFI/Microsoft/Boot/bootmgfw.efi
-    #  '';
-    #  style = {
-    #    wallpapers = [
-    #      ./wallpapers/NixOS/NixOS-Dark.png
-    #    ];
-    #  };
-    #};
+    loader.limine = {
+     enable = true;
+     efiSupport = true;
+     secureBoot.enable = true;
+     enrollConfig = true;
+     extraEntries = ''
+       /Windows 11
+        protocol: efi
+        path: uuid(c9618cff-49a7-422f-949a-2ea48b87b2fe):/EFI/Microsoft/Boot/bootmgfw.efi
+     '';
+     style = {
+       wallpapers = [
+         ./wallpapers/NixOS/NixOS-Dark.png
+       ];
+     };
+    };
 
     plymouth = {
         enable = true;
