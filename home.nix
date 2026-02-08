@@ -15,6 +15,7 @@ let
     gtk4 = "gtk-4.0";
     btop = "btop";
     satty = "satty";
+    glava = "glava";
   };
 in
 {

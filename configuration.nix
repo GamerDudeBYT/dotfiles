@@ -323,6 +323,11 @@ context.modules = [
 
     uv # python manager
 
+    lavat # lava lamp
+
+    glava # audio visualisation
+
+    hyprlandPlugins.hyprwinwrap
   ];
 
   fonts.packages = with pkgs; [
