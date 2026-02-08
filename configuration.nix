@@ -79,7 +79,6 @@
 
   time.timeZone = "Europe/London";
 
-  # Select internationalisation properties.
   i18n.defaultLocale = "en_GB.UTF-8";
 
   i18n.extraLocaleSettings = {
@@ -315,7 +314,7 @@ context.modules = [
 
     imagemagick # Image tools
 
-    subfinder
+    asciiquarium
 
   ];
 
@@ -335,6 +334,8 @@ context.modules = [
   hardware.nvidia.modesetting.enable = true;
 
   nixpkgs.config.allowUnfree = true;
+
+  services.onedrive.enable = true;
 
   services.openssh.enable = true;
 
