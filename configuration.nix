@@ -9,14 +9,14 @@
   system.nixos.label = "NixOS";
 
   boot = {
-    extraModulePackages = with config.boot.kernelPackages; [
-      v4l2loopback.out
-    ];
+    # extraModulePackages = with config.boot.kernelPackages; [
+    #   v4l2loopback.out
+    # ];
 
-    kernelModules = [ "v4l2loopback" "snd-aloop" ];
-    extraModprobeConfig = ''
-      options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
-    '';
+    # kernelModules = [ "v4l2loopback" "snd-aloop" ];
+    # extraModprobeConfig = ''
+    #   options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
+    # '';
     
     loader.systemd-boot.enable = lib.mkForce false;
 
@@ -25,15 +25,15 @@
 
     loader.efi.canTouchEfiVariables = true;
     
-    lanzaboote = {
-        enable = false;
-        pkiBundle = "/var/lib/sbctl";
+    # lanzaboote = {
+    #     enable = true;
+    #     pkiBundle = "/var/lib/sbctl";
 
-        autoGenerateKeys.enable = true;
-        autoEnrollKeys = {
-          enable = true;
-        };
-    };
+    #     autoGenerateKeys.enable = true;
+    #     autoEnrollKeys = {
+    #       enable = true;
+    #     };
+    # };
     loader.limine = {
      enable = true;
      efiSupport = true;
@@ -323,9 +323,8 @@ context.modules = [
 
     uv # python manager
 
-    lavat # lava lamp
-
-    glava # audio visualisation
+    # Audio Visualisation
+    cava
 
     hyprlandPlugins.hyprwinwrap
   ];

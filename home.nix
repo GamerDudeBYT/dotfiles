@@ -15,7 +15,7 @@ let
     gtk4 = "gtk-4.0";
     btop = "btop";
     satty = "satty";
-    glava = "glava";
+    cava = "cava";
   };
 in
 {
@@ -69,6 +69,7 @@ in
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
       nrsi = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos --install-bootloader";
       nrsu = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos --upgrade";
+      audiovis = "~/nixos-dotfiles/scripts/launch_cava.sh";
     };
   };
 

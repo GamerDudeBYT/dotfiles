@@ -9,13 +9,13 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    lanzaboote = {
-      url = "github:nix-community/lanzaboote/v1.0.0";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # lanzaboote = {
+    #   url = "github:nix-community/lanzaboote/v1.0.0";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
   };
 
-  outputs = { self, nixpkgs, pkgsunstable, home-manager, lanzaboote, ... }:
+  outputs = { self, nixpkgs, pkgsunstable, home-manager, ... }: # add lanzaboote here if re-enabling
     let
       system = "x86_64-linux";
 
@@ -37,7 +37,7 @@
 
       modules = [
 
-        lanzaboote.nixosModules.lanzaboote
+        # lanzaboote.nixosModules.lanzaboote
 
         ./configuration.nix
         home-manager.nixosModules.home-manager {
