@@ -272,7 +272,6 @@ context.modules = [
     swaynotificationcenter
     libnotify
     wl-clipboard
-    cliphist
     clipman
     wl-clip-persist
     nwg-clipman
@@ -326,7 +325,9 @@ context.modules = [
     # Audio Visualisation
     cava
 
-    hyprlandPlugins.hyprwinwrap
+    hyprlandPlugins.hyprspace
+
+    p3x-onenote
   ];
 
   fonts.packages = with pkgs; [
@@ -347,6 +348,10 @@ context.modules = [
   nixpkgs.config.allowUnfree = true;
 
   services.openssh.enable = true;
+
+  services.tailscale = {
+    enable = true;
+  };
 
   services.power-profiles-daemon.enable = true;
 
