@@ -328,6 +328,8 @@ context.modules = [
     hyprlandPlugins.hyprspace
 
     p3x-onenote
+
+    tail-tray # tailscale system tray
   ];
 
   fonts.packages = with pkgs; [
@@ -351,6 +353,7 @@ context.modules = [
 
   services.tailscale = {
     enable = true;
+    package = unstable.tailscale;
   };
 
   services.power-profiles-daemon.enable = true;
