@@ -330,6 +330,10 @@ context.modules = [
     p3x-onenote
 
     tail-tray # tailscale system tray
+
+    wiremix
+
+    rofi-pulse-select
   ];
 
   fonts.packages = with pkgs; [
@@ -339,6 +343,13 @@ context.modules = [
   # Razer devices
   hardware.openrazer = {
     enable = true;
+  };
+
+  # Delete old generations
+  nix.gc = {
+    automatic = true;
+    dates = "weekly";
+    options = "--delete-older-than 7d";
   };
 
   # Fix Driver Errors

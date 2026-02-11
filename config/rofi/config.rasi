@@ -8,7 +8,7 @@ configuration {
     display-emoji: "";
     display-network: "";
     drun-display-format: "{name}";
-    modi: "drun,window,run,emoji:rofimoji -a copy --clipboarder wl-copy,";
+    modi: "drun,window,run,emoji:rofimoji -a copy --clipboarder wl-copy,audio:wiremix";
     show-icons: true;
     run-shell-command: "fish -l -c '{cmd}'";
 }
