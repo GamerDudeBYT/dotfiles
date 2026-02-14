@@ -252,49 +252,74 @@ context.modules = [
   
   environment.systemPackages = with pkgs; [
     vim
-    wget
     neovim
+    
+    wget
+
     kitty
+
     waybar
+
     git
+
     hyprpicker
-    nautilus
+
     pavucontrol
+
     sbctl
+
     matugen
     swww
 
     unstable.vscode
 
     nwg-look
-    rofi
+    
     teams-for-linux
+
     swaynotificationcenter
     libnotify
+
     wl-clipboard
     clipman
     wl-clip-persist
+
     nwg-clipman
+
     davinci-resolve
+
     brightnessctl
+
     bluez
     bluez-tools
+
     libreoffice
+
     spotify
+
     glib
     gtk3
     gtk4
     gsettings-desktop-schemas
-    discord
+
     flatpak
-    rofi-bluetooth
+
     kdePackages.dolphin
-    quickshell
+
+    #quickshell
+
     btop
+
     whatsapp-electron
+    discord
+
+    rofi
     rofimoji
     rofi-calc
+    rofi-bluetooth
+
     efibootmgr
+
     usbutils
     
     easyeffects
@@ -304,6 +329,8 @@ context.modules = [
     satty # image editing
 
     hyprshot # screenshots
+    grim
+    slurp
 
     networkmanagerapplet
 
@@ -314,9 +341,6 @@ context.modules = [
     imagemagick # Image tools
 
     asciiquarium
-
-    onedrive
-    onedrivegui
     
     gcc # c and c++
 
@@ -332,8 +356,6 @@ context.modules = [
     tail-tray # tailscale system tray
 
     wiremix
-
-    rofi-pulse-select
   ];
 
   fonts.packages = with pkgs; [
