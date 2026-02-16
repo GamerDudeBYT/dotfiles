@@ -333,21 +333,17 @@ context.modules = [
     slurp
 
     networkmanagerapplet
-
     networkmanager_dmenu
 
     godotPackages_4_6.godot # godot 4.6
 
     imagemagick # Image tools
-
-    asciiquarium
     
     gcc # c and c++
 
     uv # python manager
 
-    # Audio Visualisation
-    cava
+    cava # Audio Visualisation
 
     hyprlandPlugins.hyprspace
 
@@ -356,6 +352,8 @@ context.modules = [
     tail-tray # tailscale system tray
 
     wiremix
+
+    asciiquarium
   ];
 
   fonts.packages = with pkgs; [
@@ -366,6 +364,8 @@ context.modules = [
   hardware.openrazer = {
     enable = true;
   };
+
+  zramSwap.enable = true;
 
   # Delete old generations
   nix.gc = {

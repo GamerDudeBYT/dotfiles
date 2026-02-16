@@ -47,4 +47,4 @@ post_hook = 'pkill -USR2 btop || true'
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
 output_path = '~/.config/cava/themes/matugen-theme'
-post_hook = 'pkill cava'
+post_hook = 'pkill cava; ~/nixos-dotfiles/scripts/launch_cava.sh'
