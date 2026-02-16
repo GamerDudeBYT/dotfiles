@@ -354,6 +354,8 @@ context.modules = [
     wiremix
 
     asciiquarium
+
+    ghostty
   ];
 
   fonts.packages = with pkgs; [

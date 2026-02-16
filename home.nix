@@ -16,6 +16,7 @@ let
     btop = "btop";
     satty = "satty";
     cava = "cava";
+    ghostty = "ghostty";
   };
 in
 {
