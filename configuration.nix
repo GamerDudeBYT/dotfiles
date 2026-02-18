@@ -9,31 +9,15 @@
   system.nixos.label = "NixOS";
 
   boot = {
-    # extraModulePackages = with config.boot.kernelPackages; [
-    #   v4l2loopback.out
-    # ];
 
-    # kernelModules = [ "v4l2loopback" "snd-aloop" ];
-    # extraModprobeConfig = ''
-    #   options v4l2loopback exclusive_caps=1 card_label="Virtual Camera"
-    # '';
+    kernelPackages = pkgs.linuxPackages_latest;
     
     loader.systemd-boot.enable = lib.mkForce false;
 
-    
     loader.grub.enable = lib.mkForce false;    
 
     loader.efi.canTouchEfiVariables = true;
-    
-    # lanzaboote = {
-    #     enable = true;
-    #     pkiBundle = "/var/lib/sbctl";
 
-    #     autoGenerateKeys.enable = true;
-    #     autoEnrollKeys = {
-    #       enable = true;
-    #     };
-    # };
     loader.limine = {
      enable = true;
      efiSupport = true;
@@ -68,11 +52,9 @@
       "udev.log_level=3"
       "systemd.show_status=auto"
     ];
-
-
   };
 
-  networking.hostName = "nixos"; # Define your hostname.
+  networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
   networking.firewall.enable = false;
@@ -260,6 +242,8 @@ context.modules = [
 
     waybar
 
+    unstable.vscode
+
     git
 
     hyprpicker
@@ -270,8 +254,6 @@ context.modules = [
 
     matugen
     swww
-
-    unstable.vscode
 
     nwg-look
     
@@ -356,6 +338,8 @@ context.modules = [
     asciiquarium
 
     ghostty
+
+    nasm
   ];
 
   fonts.packages = with pkgs; [
@@ -365,6 +349,12 @@ context.modules = [
   # Razer devices
   hardware.openrazer = {
     enable = true;
+  };
+
+  programs.obs-studio = {
+    enable = true;
+    package = pkgs.obs-studio;
+    enableVirtualCamera = true;
   };
 
   zramSwap.enable = true;
@@ -385,6 +375,11 @@ context.modules = [
   nixpkgs.config.allowUnfree = true;
 
   services.openssh.enable = true;
+
+  services.playerctld = {
+    enable = true;
+    package = pkgs.playerctl;
+  };
 
   services.tailscale = {
     enable = true;

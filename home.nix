@@ -40,27 +40,59 @@ in
 
   home.packages = with pkgs; [
     (pkgs.writeShellApplication {
-        name = "ns";
-        runtimeInputs = with pkgs; [
-            fzf
-            (nix-search-tv.overrideAttrs {
-            env.GOEXPERIMENT = "jsonv2";
-            })
-        ];
-        text = ''exec "${pkgs.nix-search-tv.src}/nixpkgs.sh" "$@"'';
+      name = "ns";
+      runtimeInputs = with pkgs; [
+          fzf
+          (nix-search-tv.overrideAttrs {
+          env.GOEXPERIMENT = "jsonv2";
+          })
+      ];
+      text = ''exec "${pkgs.nix-search-tv.src}/nixpkgs.sh" "$@"'';
     })
 
     (pkgs.writeShellApplication {
-        name = "wallset";
-        runtimeInputs = [ pkgs.matugen pkgs.swww ];
-        text = ''
-            matugen image "$1"
-            notify-send "Wallpaper Changed" "$1"
-        '';
+      name = "wallset";
+      runtimeInputs = [ pkgs.matugen pkgs.swww ];
+      text = ''
+          matugen image "$1"
+          notify-send "Wallpaper Changed" "$1"
+      '';
     })
 
+    (pkgs.writeShellApplication {
+      name = "asm";
+      runtimeInputs = [
+        pkgs.nasm
+        pkgs.binutils
+      ];
+      text = ''
+        if [ -z "$1" ]; then
+            echo "Usage: asm <file.asm | file> [program args...]"
+            exit 1
+        fi
 
-    quickshell
+        file="''${1%.asm}"
+        asm_file="$file.asm"
+        obj_file="$file.o"
+        out_file="$file"
+
+        shift
+
+        if [ ! -f "$asm_file" ]; then
+            echo "Error: $asm_file not found"
+            exit 1
+        fi
+
+        nasm -f elf64 "$asm_file" -o "$obj_file"
+        ld "$obj_file" -o "$out_file"
+        rm "$obj_file"
+
+        echo "✓ Built ./$out_file"
+        echo "▶ Running:"
+        exec "./$out_file" "$@"
+      '';
+    })
+
 
   ];
 
