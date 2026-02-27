@@ -102,6 +102,7 @@ in
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
       nrsi = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos --install-bootloader";
       nrsu = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos --upgrade";
+      nrbi = "sudo nixos-rebuild boot --flake ~/nixos-dotfiles#nixos --install-bootloader";
       audiovis = "~/nixos-dotfiles/scripts/launch_cava.sh";
     };
   };

@@ -205,7 +205,7 @@ context.modules = [
 
   users.users.ethan = {
     isNormalUser = true;
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "dialout" "docker" ];
     packages = with pkgs; [
       tree
     ];
@@ -320,8 +320,6 @@ context.modules = [
     godotPackages_4_6.godot # godot 4.6
 
     imagemagick # Image tools
-    
-    gcc # c and c++
 
     uv # python manager
 
@@ -340,11 +338,48 @@ context.modules = [
     ghostty
 
     nasm
+    qemu
+
+    unzip
+
+    unstable.arduino-ide
+
+    python3
+
+    ascii
+    
+    gcc
+
+    ntfs3g
   ];
 
   fonts.packages = with pkgs; [
     nerd-fonts.hurmit
   ];
+
+  programs.nix-ld.enable = true;
+
+  virtualisation.docker.enable = true;
+
+  virtualisation.oci-containers.containers.ledfx = {
+    image = "ledfxorg/ledfx:latest";
+
+    ports = [ "8888:8888" ];
+
+    volumes = [
+      "/var/lib/ledfx:/config"
+      "/run/user/1000/pulse:/run/user/1000/pulse"
+    ];
+
+    autoStart = true;
+
+    environment = {
+      PULSE_SERVER = "unix:/run/user/1000/pulse/native";
+    };
+
+    privileged = true;
+  
+  };
 
   # Razer devices
   hardware.openrazer = {
