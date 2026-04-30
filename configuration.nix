@@ -26,7 +26,7 @@
      extraEntries = ''
        /Windows 11
         protocol: efi
-        path: uuid(c9618cff-49a7-422f-949a-2ea48b87b2fe):/EFI/Microsoft/Boot/bootmgfw.efi
+        path: boot():/EFI/Microsoft/Boot/bootmgfw.efi
      '';
      style = {
        wallpapers = [
@@ -349,8 +349,6 @@ context.modules = [
     ascii
     
     gcc
-
-    ntfs3g
   ];
 
   fonts.packages = with pkgs; [
