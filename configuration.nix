@@ -323,7 +323,7 @@ context.modules = [
   nix.gc = {
     automatic = true;
     dates = "weekly";
-    options = "--delete-older-than 7d";
+    options = "--delete-older-than 14d";
   };
 
   # nvidia — open kernel module required to fix driver errors on this machine
