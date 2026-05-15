@@ -4,8 +4,8 @@ command = "swww"
 arguments = ["img", "--transition-type", "center", "--transition-fps", "60"]
 
 [templates.hyprland]
-input_path = '~/.config/matugen/templates/hyprland-colors.conf'
-output_path = '~/.config/hypr/colors.conf'
+input_path = '~/.config/matugen/templates/hyprland-colors.lua'
+output_path = '~/.config/hypr/colors.lua'
 
 [templates.wezterm]
 input_path = '~/.config/matugen/templates/wezterm_theme.toml'

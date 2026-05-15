@@ -272,9 +272,6 @@ context.modules = [
 
     brightnessctl
 
-    bluez
-    bluez-tools
-
     libreoffice
 
     spotify
@@ -356,28 +353,6 @@ context.modules = [
   ];
 
   programs.nix-ld.enable = true;
-
-  virtualisation.docker.enable = true;
-
-  virtualisation.oci-containers.containers.ledfx = {
-    image = "ledfxorg/ledfx:latest";
-
-    ports = [ "8888:8888" ];
-
-    volumes = [
-      "/var/lib/ledfx:/config"
-      "/run/user/1000/pulse:/run/user/1000/pulse"
-    ];
-
-    autoStart = true;
-
-    environment = {
-      PULSE_SERVER = "unix:/run/user/1000/pulse/native";
-    };
-
-    privileged = true;
-  
-  };
 
   # Razer devices
   hardware.openrazer = {

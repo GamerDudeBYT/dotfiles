@@ -17,6 +17,7 @@ let
     satty = "satty";
     cava = "cava";
     ghostty = "ghostty";
+    uwsm = "uwsm";
   };
 in
 {
@@ -98,6 +99,11 @@ in
 
   programs.fish = {
     enable = true;
+    loginShellInit = ''
+      if test -z "$WAYLAND_DISPLAY" && test "$XDG_VTNR" = 1
+      exec uwsm start hyprland-uwsm.desktop
+      end
+    '';
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
       nrsi = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos --install-bootloader";
