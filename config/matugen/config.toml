@@ -26,14 +26,15 @@ input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/swaync/colors.css'
 post_hook = "swaync-client -rs"
 
-# [templates.gtk3]
-# input_path = '~/.config/matugen/templates/gtk-colors.css'
-# output_path = '~/.config/gtk-3.0/colors.css'
-# post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
+[templates.gtk3]
+input_path = '~/.config/matugen/templates/gtk-colors.css'
+output_path = '~/.config/gtk-3.0/colors.css'
+post_hook = 'gsettings set org.gnome.desktop.interface gtk-theme ""; gsettings set org.gnome.desktop.interface gtk-theme adw-gtk3-{{mode}}'
 
-# [templates.gtk4]
-# input_path = '~/.config/matugen/templates/gtk-colors.css'
-# output_path = '~/.config/gtk-4.0/colors.css'
+[templates.gtk4]
+input_path = '~/.config/matugen/templates/gtk-colors.css'
+output_path = '~/.config/gtk-4.0/colors.css'
+post_hook = '~/.config/matugen/post-hook-scripts/gtk-themes-reload.sh'
 
 # [templates.quickshell]
 # input_path = '~/.config/matugen/templates/quickshell.qml'
@@ -53,3 +54,7 @@ post_hook = 'pkill cava; ~/nixos-dotfiles/scripts/launch_cava.sh'
 input_path = '~/.config/matugen/templates/ghostty'
 output_path = '~/.config/ghostty/themes/Matugen'
 post_hook = 'pkill -SIGUSR2 ghostty'
+
+[templates.zed]
+input_path = '~/.config/matugen/templates/zed-colors.json'
+output_path = '~/.config/zed/themes/matugen.json'

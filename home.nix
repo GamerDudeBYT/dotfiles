@@ -1,12 +1,10 @@
-{ config, pkgs, ... }:
+{ config, pkgs, unstable, ... }:
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-
   configs = {
     hypr = "hypr";
     waybar = "waybar";
-    wezterm = "wezterm";
     quickshell = "quickshell";
     matugen = "matugen";
     rofi = "rofi";
@@ -18,6 +16,7 @@ let
     cava = "cava";
     ghostty = "ghostty";
     uwsm = "uwsm";
+    zed = "zed";
   };
 in
 {
@@ -39,64 +38,6 @@ in
     '';
   };
 
-  home.packages = with pkgs; [
-    (pkgs.writeShellApplication {
-      name = "ns";
-      runtimeInputs = with pkgs; [
-          fzf
-          (nix-search-tv.overrideAttrs {
-          env.GOEXPERIMENT = "jsonv2";
-          })
-      ];
-      text = ''exec "${pkgs.nix-search-tv.src}/nixpkgs.sh" "$@"'';
-    })
-
-    (pkgs.writeShellApplication {
-      name = "wallset";
-      runtimeInputs = [ pkgs.matugen pkgs.swww ];
-      text = ''
-          matugen image "$1"
-          notify-send "Wallpaper Changed" "$1"
-      '';
-    })
-
-    (pkgs.writeShellApplication {
-      name = "asm";
-      runtimeInputs = [
-        pkgs.nasm
-        pkgs.binutils
-      ];
-      text = ''
-        if [ -z "$1" ]; then
-            echo "Usage: asm <file.asm | file> [program args...]"
-            exit 1
-        fi
-
-        file="''${1%.asm}"
-        asm_file="$file.asm"
-        obj_file="$file.o"
-        out_file="$file"
-
-        shift
-
-        if [ ! -f "$asm_file" ]; then
-            echo "Error: $asm_file not found"
-            exit 1
-        fi
-
-        nasm -f elf64 "$asm_file" -o "$obj_file"
-        ld "$obj_file" -o "$out_file"
-        rm "$obj_file"
-
-        echo "✓ Built ./$out_file"
-        echo "▶ Running:"
-        exec "./$out_file" "$@"
-      '';
-    })
-
-
-  ];
-
   programs.fish = {
     enable = true;
     loginShellInit = ''
@@ -113,9 +54,94 @@ in
     };
   };
 
-  programs.wezterm = {
+  programs.zed-editor = {
     enable = true;
   };
+
+  home.packages = with pkgs; [
+    # Shell utilities
+    (pkgs.writeShellApplication {
+      name = "ns";
+      runtimeInputs = with pkgs; [
+        fzf
+        (nix-search-tv.overrideAttrs {
+          env.GOEXPERIMENT = "jsonv2";
+        })
+      ];
+      text = ''exec "${pkgs.nix-search-tv.src}/nixpkgs.sh" "$@"'';
+    })
+    (pkgs.writeShellApplication {
+      name = "wallset";
+      runtimeInputs = [ pkgs.matugen pkgs.swww ];
+      text = ''
+        matugen image "$1"
+        notify-send "Wallpaper Changed" "$1"
+      '';
+    })
+    (pkgs.writeShellApplication {
+      name = "asm";
+      runtimeInputs = [
+        pkgs.nasm
+        pkgs.binutils
+      ];
+      text = ''
+        if [ -z "$1" ]; then
+            echo "Usage: asm <file.asm | file> [program args...]"
+            exit 1
+        fi
+        file="''${1%.asm}"
+        asm_file="$file.asm"
+        obj_file="$file.o"
+        out_file="$file"
+        shift
+        if [ ! -f "$asm_file" ]; then
+            echo "Error: $asm_file not found"
+            exit 1
+        fi
+        nasm -f elf64 "$asm_file" -o "$obj_file"
+        ld "$obj_file" -o "$out_file"
+        rm "$obj_file"
+        echo "✓ Built ./$out_file"
+        echo "▶ Running:"
+        exec "./$out_file" "$@"
+      '';
+    })
+
+    # Media & entertainment
+    spotify
+    davinci-resolve
+    cava
+
+    # Communication
+    discord
+    whatsapp-electron
+    teams-for-linux
+    p3x-onenote
+
+    # Productivity
+    libreoffice
+
+    # Tools with home config symlinks
+    rofi
+    rofimoji
+    rofi-calc
+    rofi-bluetooth
+    satty
+    ghostty
+    btop
+
+    # Fun
+    chocolate-doom
+    asciiquarium
+    ascii
+
+    # Rofi launchers
+    tail-tray
+
+    # Dev Tools
+    godotPackages_4_6.godot
+    unstable.arduino-ide
+  ];
 
   xdg.configFile = builtins.mapAttrs
     (name: subpath: {

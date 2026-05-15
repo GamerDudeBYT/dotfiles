@@ -1,0 +1,67 @@
+{
+    "tab_size": 4,
+    "status_bar": {
+        "show_active_file": false,
+    },
+    "title_bar": {
+        "show_branch_status_icon": false,
+        "show_user_menu": true,
+        "show_menus": true,
+    },
+    "toolbar": {
+        "selections_menu": true,
+    },
+    "relative_line_numbers": "disabled",
+    "vim": {
+        "toggle_relative_line_numbers": true,
+    },
+    "vim_mode": false,
+    "buffer_font_family": ".ZedMono",
+    "terminal": {
+        "bell": "system",
+        "shell": "system",
+        "show_count_badge": true,
+        "dock": "bottom",
+        "font_family": "Hurmit Nerd Font Mono",
+        "env": {
+            "STARSHIP_CONFIG": "",
+        },
+    },
+    "telemetry": {
+        "diagnostics": false,
+        "metrics": false,
+    },
+    "disable_ai": true,
+    "project_panel": {
+        "git_status_indicator": false,
+        "default_width": 240.0,
+        "dock": "left",
+    },
+    "outline_panel": {
+        "dock": "right",
+    },
+    "show_whitespaces": "boundary",
+    "icon_theme": {
+        "mode": "dark",
+        "light": "Catppuccin Mocha",
+        "dark": "Catppuccin Mocha",
+    },
+    "base_keymap": "VSCode",
+    "ui_font_size": 16,
+    "buffer_font_size": 15,
+    "theme": {
+        "mode": "dark",
+        "light": "Catppuccin Mocha (red)",
+        "dark": "Catppuccin Mocha (red)",
+    },
+    "auto_install_extensions": {
+        "html": true,
+        "toml": true,
+        "git-firefly": true,
+        "catppuccin": true,
+        "catppuccin-icons": true,
+        "nix": true,
+    },
+    "auto_update": false,
+    "hour_format": "hour24",
+}

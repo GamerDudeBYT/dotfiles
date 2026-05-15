@@ -57,6 +57,7 @@
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
+  # Firewall disabled — Tailscale handles network filtering
   networking.firewall.enable = false;
 
   time.timeZone = "Europe/London";
@@ -83,9 +84,8 @@
     withUWSM = true;
   };
 
-  programs.hyprlock = {
-    enable = true;
-  };
+  # Installs PAM module; hyprlock config lives in home.nix
+  programs.hyprlock.enable = true;
   
   console.keyMap = "uk";
 
@@ -179,7 +179,7 @@ context.modules = [
                     { output = "convLFE_R:Out" input="mixR:In 8" }
                     { output = "convLFE_L:Out" input="mixL:In 8" }
                 ]
-                inputs  = [ "copyFL:In" "copyFR:In" "copyFC:In" "copyLFE:In" "copyRL:In" "copyRR:In", "copySL:In", "copySR:In" ]
+                inputs  = [ "copyFL:In" "copyFR:In" "copyFC:In" "copyLFE:In" "copyRL:In" "copyRR:In" "copySL:In" "copySR:In" ]
                 outputs = [ "mixL:Out" "mixR:Out" ]
             }
             capture.props = {
@@ -233,119 +233,75 @@ context.modules = [
   };
   
   environment.systemPackages = with pkgs; [
+    # Editors
     vim
     neovim
-    
-    wget
-
-    kitty
-
-    waybar
-
     unstable.vscode
 
+    # Core utilities
+    wget
     git
-
-    hyprpicker
-
-    pavucontrol
-
+    unzip
+    usbutils
+    efibootmgr
     sbctl
 
+    # Build tools
+    gcc
+    nasm
+    qemu
+
+    # Theming / Wayland
+    kitty
+    waybar
     matugen
     swww
-
     nwg-look
-    
-    teams-for-linux
-
-    swaynotificationcenter
-    libnotify
-
-    wl-clipboard
-    clipman
-    wl-clip-persist
-
-    nwg-clipman
-
-    davinci-resolve
-
-    brightnessctl
-
-    libreoffice
-
-    spotify
-
     glib
     gtk3
     gtk4
     gsettings-desktop-schemas
 
-    flatpak
-
-    kdePackages.dolphin
-
-    #quickshell
-
-    btop
-
-    whatsapp-electron
-    discord
-
-    rofi
-    rofimoji
-    rofi-calc
-    rofi-bluetooth
-
-    efibootmgr
-
-    usbutils
-    
-    easyeffects
-
-    chocolate-doom # DOOM!
-
-    satty # image editing
-
-    hyprshot # screenshots
+    # Hyprland tools
+    hyprpicker
+    hyprshot
     grim
     slurp
+    hyprlandPlugins.hyprspace
 
+    # Audio
+    pavucontrol
+    easyeffects
+    wiremix
+
+    # Notifications
+    swaynotificationcenter
+    libnotify
+
+    # Clipboard
+    wl-clipboard
+    clipman
+    wl-clip-persist
+    nwg-clipman
+
+    # Networking
     networkmanagerapplet
     networkmanager_dmenu
 
-    godotPackages_4_6.godot # godot 4.6
+    # System
+    flatpak
+    imagemagick
+    brightnessctl
 
-    imagemagick # Image tools
-
-    uv # python manager
-
-    cava # Audio Visualisation
-
-    hyprlandPlugins.hyprspace
-
-    p3x-onenote
-
-    tail-tray # tailscale system tray
-
-    wiremix
-
-    asciiquarium
-
-    ghostty
-
-    nasm
-    qemu
-
-    unzip
-
-    unstable.arduino-ide
-
+    # Dev tools
     python3
+    uv
 
-    ascii
-    
-    gcc
+    # Other
+    nemo
+
+    # GTK
+    adw-gtk3
   ];
 
   fonts.packages = with pkgs; [
@@ -354,10 +310,7 @@ context.modules = [
 
   programs.nix-ld.enable = true;
 
-  # Razer devices
-  hardware.openrazer = {
-    enable = true;
-  };
+  hardware.openrazer.enable = true;
 
   programs.obs-studio = {
     enable = true;
@@ -367,14 +320,13 @@ context.modules = [
 
   zramSwap.enable = true;
 
-  # Delete old generations
   nix.gc = {
     automatic = true;
     dates = "weekly";
     options = "--delete-older-than 7d";
   };
 
-  # Fix Driver Errors
+  # nvidia — open kernel module required to fix driver errors on this machine
   hardware.graphics.enable = true;
   services.xserver.videoDrivers = [ "nvidia" ];
   hardware.nvidia.open = true;
@@ -401,4 +353,3 @@ context.modules = [
   system.stateVersion = "25.11";
 
 }
-
