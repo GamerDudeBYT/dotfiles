@@ -61,6 +61,7 @@
         "catppuccin": true,
         "catppuccin-icons": true,
         "nix": true,
+        "hyprlang": true
     },
     "auto_update": false,
     "hour_format": "hour24",
