@@ -50,7 +50,7 @@ local cava                = "~/nixos-dotfiles/scripts/launch_cava.sh"
 
 hl.on("hyprland.start", function ()
   hl.exec_cmd("hyprlock --immediate-render")
-  hl.exec_cmd(terminal)
+  -- hl.exec_cmd(terminal)
   hl.exec_cmd("nm-applet &")
   hl.exec_cmd(browser)
   hl.exec_cmd(reload_waybar)
@@ -121,8 +121,8 @@ hl.config({
         border_size = 2,
 
         col = {
-            active_border   = { colors = {"$primary_container", "$inverse_primary"}, angle = 45 },
-            inactive_border = "$outline",
+            active_border   = { colors = {primary_container, inverse_primary}, angle = 45 },
+            inactive_border = outline,
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps

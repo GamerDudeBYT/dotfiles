@@ -1,4 +1,4 @@
-{ config, lib, pkgs, unstable, ... }:
+{ config, lib, pkgs, unstable, inputs, ... }:
 
 {
   imports =
@@ -54,10 +54,13 @@
     ];
   };
 
+  services.displayManager = {
+    ly.enable = false;
+  };
+
   networking.hostName = "nixos";
   networking.networkmanager.enable = true;
 
-  # Firewall disabled — Tailscale handles network filtering
   networking.firewall.enable = false;
 
   time.timeZone = "Europe/London";
@@ -82,6 +85,15 @@
     enable = true;
     xwayland.enable = true;
     withUWSM = true;
+    package = inputs.hyprland.packages.${pkgs.system}.hyprland;
+    portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
+  };
+
+  xdg.portal = {
+    enable = true;
+    extraPortals = with pkgs; [
+      xdg-desktop-portal-gtk
+    ];
   };
 
   # Installs PAM module; hyprlock config lives in home.nix
@@ -267,7 +279,6 @@ context.modules = [
     hyprshot
     grim
     slurp
-    hyprlandPlugins.hyprspace
 
     # Audio
     pavucontrol
@@ -348,7 +359,13 @@ context.modules = [
 
   services.power-profiles-daemon.enable = true;
 
-  nix.settings.experimental-features = [ "nix-command" "flakes" ]; 
+  nix.settings = {
+    experimental-features = [ "nix-command" "flakes" ];
+    download-buffer-size = 268435456;
+    trusted-users = ["root" "ethan"];
+    extra-substituters = ["https://hyprland.cachix.org"];
+    extra-trusted-public-keys = ["hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="];
+  };
 
   system.stateVersion = "25.11";
 

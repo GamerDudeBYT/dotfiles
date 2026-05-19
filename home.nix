@@ -28,7 +28,7 @@ in
     enable = true;
     shellAliases = {
       btw = "echo i use hyprland btw";
-      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#hyprland-btw";
+      nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
       vim = "nvim";
     };
     profileExtra = ''
@@ -74,6 +74,7 @@ in
       name = "wallset";
       runtimeInputs = [ pkgs.matugen pkgs.swww ];
       text = ''
+        swww img "$1"
         matugen image "$1"
         notify-send "Wallpaper Changed" "$1"
       '';
