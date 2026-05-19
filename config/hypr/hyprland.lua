@@ -413,6 +413,13 @@ hl.window_rule({
     move = { "monitor_w * 0.5", "monitor_h * 0.5" }
 })
 
+hl.layer_rule({
+    match = {
+        namespace = "cava_panel"
+    },
+    no_screen_share = true
+})
+
 -- DP-1 gets workspaces 1–10
 for i = 1, 10 do
     hl.workspace_rule({
