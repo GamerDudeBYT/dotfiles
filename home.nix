@@ -31,20 +31,20 @@ in
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
       vim = "nvim";
     };
-    profileExtra = ''
-      if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
-          exec uwsm start hyprland-uwsm.desktop
-      fi
-    '';
+    # profileExtra = ''
+    #   if [ -z "$WAYLAND_DISPLAY" ] && [ "$XDG_VTNR" = 1 ]; then
+    #       exec uwsm start hyprland-uwsm.desktop
+    #   fi
+    # '';
   };
 
   programs.fish = {
     enable = true;
-    loginShellInit = ''
-      if test -z "$WAYLAND_DISPLAY" && test "$XDG_VTNR" = 1
-      exec uwsm start hyprland-uwsm.desktop
-      end
-    '';
+    # loginShellInit = ''
+    #   if test -z "$WAYLAND_DISPLAY" && test "$XDG_VTNR" = 1
+    #   exec uwsm start hyprland-uwsm.desktop
+    #   end
+    # '';
     shellAliases = {
       nrs = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos";
       nrsi = "sudo nixos-rebuild switch --flake ~/nixos-dotfiles#nixos --install-bootloader";

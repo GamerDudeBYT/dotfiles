@@ -11,10 +11,10 @@
   boot = {
 
     kernelPackages = pkgs.linuxPackages_latest;
-    
+
     loader.systemd-boot.enable = lib.mkForce false;
 
-    loader.grub.enable = lib.mkForce false;    
+    loader.grub.enable = lib.mkForce false;
 
     loader.efi.canTouchEfiVariables = true;
 
@@ -55,7 +55,7 @@
   };
 
   services.displayManager = {
-    ly.enable = false;
+    ly.enable = true;
   };
 
   networking.hostName = "nixos";
@@ -79,12 +79,12 @@
     LC_TIME = "en_GB.UTF-8";
   };
 
-  services.getty.autologinUser = "ethan";
+  # services.getty.autologinUser = "ethan";
 
   programs.hyprland = {
     enable = true;
     xwayland.enable = true;
-    withUWSM = true;
+    # withUWSM = true;
     package = inputs.hyprland.packages.${pkgs.system}.hyprland;
     portalPackage = inputs.hyprland.packages.${pkgs.system}.xdg-desktop-portal-hyprland;
   };
@@ -98,7 +98,7 @@
 
   # Installs PAM module; hyprlock config lives in home.nix
   programs.hyprlock.enable = true;
-  
+
   console.keyMap = "uk";
 
   services.printing.enable = true;
@@ -243,7 +243,7 @@ context.modules = [
     enable = true;
     extest.enable = true;
   };
-  
+
   environment.systemPackages = with pkgs; [
     # Editors
     vim

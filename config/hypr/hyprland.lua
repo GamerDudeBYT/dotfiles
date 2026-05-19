@@ -12,9 +12,9 @@ hl.monitor({
     scale    = "1",
 })
 hl.monitor({
-    output   = "HDMI-A-1",
+    output   = "HDMI-A-2",
     mode     = "1440x900@75",
-    position = "auto",
+    position = "-1440x0",
     scale    = "1",
 })
 hl.monitor({
@@ -31,7 +31,7 @@ hl.monitor({
 
 -- Set programs that you use
 local terminal            = "ghostty"
-local file_manager         = "dolphin"
+local file_manager        = "nemo"
 local menu                = "pkill rofi || rofi -show drun"
 local reload_waybar       = "pkill waybar; waybar &"
 local browser             = "firefox"
@@ -121,8 +121,8 @@ hl.config({
         border_size = 2,
 
         col = {
-            active_border   = { colors = {primary_container, inverse_primary}, angle = 45 },
-            inactive_border = outline,
+            active_border   = { colors = {"rgba(33ccffee)", "rgba(00ff99ee)"}, angle = 45 },
+            inactive_border = "rgba(595959aa)",
         },
 
         -- Set to true to enable resizing windows by clicking and dragging on borders and gaps
@@ -304,8 +304,8 @@ hl.bind(mainMod .. " + SHIFT + R", hl.dsp.exec_cmd(reload_waybar))
 hl.bind(mainMod .. " + SHIFT + N", hl.dsp.exec_cmd(notification_center))
 hl.bind(mainMod .. " + SHIFT + S", hl.dsp.exec_cmd(screenshot))
 
-hl.bind(mainMod .. " + ALT + T", hl.dsk.exec_cmd("teams-for-linux"))
-hl.bind(mainMod .. " + ALT + C", hl.dsk.exec_cmd(cava))
+hl.bind(mainMod .. " + ALT + T", hl.dsp.exec_cmd("teams-for-linux"))
+hl.bind(mainMod .. " + ALT + C", hl.dsp.exec_cmd(cava))
 
 
 -- Move focus with mainMod + arrow keys
@@ -407,14 +407,20 @@ hl.window_rule({
     move = {"monitor_w * 0.5", "monitor_h * 0.5"}
 })
 
-hl.workspace_rule({
-    workspace = "1"
-    default = true
-    monitor = "DP-1"
-})
+-- DP-1 gets workspaces 1–10
+for i = 1, 10 do
+    hl.workspace_rule({
+        workspace = tostring(i),
+        monitor = "DP-1",
+        default = true
+    })
+end
 
-hl.workspace_rule({
-    workspace = "11"
-    default = true
-    monitor = "HDMI-A-1"
-})
+-- HDMI-A-2 gets workspaces 11–20
+for i = 11, 20 do
+    hl.workspace_rule({
+        workspace = tostring(i),
+        monitor = "HDMI-A-2",
+        default = true
+    })
+end
