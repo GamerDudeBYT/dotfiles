@@ -257,6 +257,7 @@ context.modules = [
     usbutils
     efibootmgr
     sbctl
+    vlc
 
     # Build tools
     gcc
