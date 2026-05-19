@@ -13,7 +13,6 @@ let
     "satty"
     "cava"
     "ghostty"
-    "uwsm"
     "zed"
   ];
 in

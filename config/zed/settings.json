@@ -51,8 +51,8 @@
     "buffer_font_size": 15,
     "theme": {
         "mode": "dark",
-        "light": "Catppuccin Mocha (red)",
-        "dark": "Catppuccin Mocha (red)",
+        "light": "Matugen Light",
+        "dark": "Matugen Dark",
     },
     "auto_install_extensions": {
         "html": true,
