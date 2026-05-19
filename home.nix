@@ -2,22 +2,20 @@
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
-  configs = {
-    hypr = "hypr";
-    waybar = "waybar";
-    quickshell = "quickshell";
-    matugen = "matugen";
-    rofi = "rofi";
-    swaync = "swaync";
-    gtk3 = "gtk-3.0";
-    gtk4 = "gtk-4.0";
-    btop = "btop";
-    satty = "satty";
-    cava = "cava";
-    ghostty = "ghostty";
-    uwsm = "uwsm";
-    zed = "zed";
-  };
+  configs = [
+    "hypr"
+    "waybar"
+    "quickshell"
+    "matugen"
+    "rofi"
+    "swaync"
+    "btop"
+    "satty"
+    "cava"
+    "ghostty"
+    "uwsm"
+    "zed"
+  ];
 in
 {
   home.username = "ethan";
@@ -135,6 +133,7 @@ in
     chocolate-doom
     asciiquarium
     ascii
+    gnome-clocks
 
     # Rofi launchers
     tail-tray
@@ -159,10 +158,12 @@ in
     platformTheme.name = "gtk";
   };
 
-  xdg.configFile = builtins.mapAttrs
-    (name: subpath: {
-      source = create_symlink "${dotfiles}/${subpath}";
-      recursive = true;
-    })
-    configs;
+  xdg.configFile =
+    builtins.listToAttrs (map (name: {
+      name = name;
+      value = {
+        source = create_symlink "${dotfiles}/${name}";
+        recursive = true;
+      };
+    }) configs);
 }
