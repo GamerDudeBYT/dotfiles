@@ -152,13 +152,11 @@ in
 
   gtk = {
     enable = true;
-    theme.name = "Adwaita-dark"; 
   };
 
   qt = {
     enable = true;
     platformTheme.name = "gtk";
-    style.name = "adwaita-dark";
   };
 
   xdg.configFile = builtins.mapAttrs
