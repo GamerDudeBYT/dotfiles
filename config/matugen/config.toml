@@ -7,11 +7,6 @@ arguments = ["img", "--transition-type", "center", "--transition-fps", "60"]
 input_path = '~/.config/matugen/templates/hyprland-colors.lua'
 output_path = '~/.config/hypr/colors.lua'
 
-[templates.wezterm]
-input_path = '~/.config/matugen/templates/wezterm_theme.toml'
-output_path = '~/.config/wezterm/matugen_theme.toml'
-post_hook = 'touch ~/.config/wezterm/wezterm.lua'
-
 [templates.rofi]
 input_path = '~/.config/matugen/templates/rofi-colors.rasi'
 output_path = '~/.config/rofi/colors.rasi'
@@ -19,7 +14,7 @@ output_path = '~/.config/rofi/colors.rasi'
 [templates.waybar]
 input_path = '~/.config/matugen/templates/colors.css'
 output_path = '~/.config/waybar/colors.css'
-post_hook = 'pkill waybar; waybar & disown'
+post_hook = 'pkill -SIGUSR2 waybar'
 
 [templates.swaync]
 input_path = '~/.config/matugen/templates/colors.css'
@@ -48,7 +43,7 @@ post_hook = 'pkill -USR2 btop || true'
 [templates.cava]
 input_path = '~/.config/matugen/templates/cava-colors.ini'
 output_path = '~/.config/cava/themes/matugen-theme'
-post_hook = 'pkill cava; ~/nixos-dotfiles/scripts/launch_cava.sh'
+post_hook = 'pkill -USR1 cava; ~/nixos-dotfiles/scripts/launch_cava.sh'
 
 [templates.ghostty]
 input_path = '~/.config/matugen/templates/ghostty'

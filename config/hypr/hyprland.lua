@@ -1,4 +1,4 @@
-local colors = require("colors")
+colors = require("colors")
 
 ------------------
 ---- MONITORS ----
@@ -413,12 +413,13 @@ hl.window_rule({
     move = { "monitor_w * 0.5", "monitor_h * 0.5" }
 })
 
-hl.layer_rule({
-    match = {
-        namespace = "cava_panel"
-    },
-    no_screen_share = true
-})
+---- This breaks screenshots but could be useful for other things
+-- hl.layer_rule({
+--     match = {
+--         namespace = "cava_panel"
+--     },
+--     no_screen_share = true
+-- })
 
 -- DP-1 gets workspaces 1–10
 for i = 1, 10 do
