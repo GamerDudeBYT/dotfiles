@@ -144,6 +144,23 @@ in
     unstable.arduino-ide
   ];
 
+  dconf.settings = {
+  "org/gnome/desktop/interface" = {
+        color-scheme = "prefer-dark";
+    };
+  };
+
+  gtk = {
+    enable = true;
+    theme.name = "Adwaita-dark"; 
+  };
+
+  qt = {
+    enable = true;
+    platformTheme.name = "gtk";
+    style.name = "adwaita-dark";
+  };
+
   xdg.configFile = builtins.mapAttrs
     (name: subpath: {
       source = create_symlink "${dotfiles}/${subpath}";
