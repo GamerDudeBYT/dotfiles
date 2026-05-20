@@ -8,6 +8,8 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
+    astal.url = "github:aylur/astal";
+    ags.url = "github:aylur/ags";
   };
   outputs = inputs @ {
     self,
