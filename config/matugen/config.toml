@@ -53,3 +53,8 @@ post_hook = 'pkill -SIGUSR2 ghostty'
 [templates.zed]
 input_path = '~/.config/matugen/templates/zed-colors.json'
 output_path = '~/.config/zed/themes/matugen.json'
+
+
+[templates.firefox-website-colors]
+input_path = '~/.config/matugen/templates/firefox-colors.css'
+output_path = '~/.config/mozilla/firefox/oiyfjlz8.default/chrome/colors.css'
