@@ -1,10 +1,8 @@
 { config, pkgs, unstable, inputs, ... }:
 let
-  astal = inputs.astal.packages.${pkgs.system};
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
   configs = [
-    "ags"
     "hypr"
     "waybar"
     "quickshell"
@@ -106,11 +104,8 @@ in
         exec "./$out_file" "$@"
       '';
     })
-
-    # AGS
-    ags
-    astal.notifd
-    astal.battery
+    # Quickshell
+    quickshell
 
     # Media & entertainment
     spotify

@@ -258,6 +258,7 @@ context.modules = [
     efibootmgr
     sbctl
     vlc
+    nodejs
 
     # Build tools
     gcc
