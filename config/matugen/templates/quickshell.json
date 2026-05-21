@@ -1,0 +1,6 @@
+{
+  "md3": {<* for name, color in colors *>
+    "{{ name }}": "{{ color.default.hex }}"
+<* endfor *>
+  }
+}

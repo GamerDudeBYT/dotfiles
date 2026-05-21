@@ -1,4 +1,10 @@
-{ config, pkgs, unstable, inputs, ... }:
+{
+  config,
+  pkgs,
+  unstable,
+  inputs,
+  ...
+}:
 let
   dotfiles = "${config.home.homeDirectory}/nixos-dotfiles/config";
   create_symlink = path: config.lib.file.mkOutOfStoreSymlink path;
@@ -53,6 +59,16 @@ in
 
   programs.zed-editor = {
     enable = true;
+    extensions = [
+      "html"
+      "toml"
+      "git-firefly"
+      "catppuccin"
+      "catppuccin-icons"
+      "nix"
+      "lua"
+      "qml"
+    ];
   };
 
   home.packages = with pkgs; [
@@ -69,9 +85,11 @@ in
     })
     (pkgs.writeShellApplication {
       name = "wallset";
-      runtimeInputs = [ pkgs.matugen pkgs.swww ];
+      runtimeInputs = [
+        inputs.matugen.packages.${pkgs.stdenv.hostPlatform.system}.default
+        inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww
+      ];
       text = ''
-        swww img "$1"
         matugen image "$1"
         notify-send "Wallpaper Changed" "$1"
       '';
@@ -105,7 +123,8 @@ in
       '';
     })
     # Quickshell
-    quickshell
+    inputs.quickshell.packages.${pkgs.stdenv.hostPlatform.system}.default
+    qt6.qtdeclarative
 
     # Media & entertainment
     spotify
@@ -145,8 +164,8 @@ in
   ];
 
   dconf.settings = {
-  "org/gnome/desktop/interface" = {
-        color-scheme = "prefer-dark";
+    "org/gnome/desktop/interface" = {
+      color-scheme = "prefer-dark";
     };
   };
 
@@ -159,12 +178,13 @@ in
     platformTheme.name = "gtk";
   };
 
-  xdg.configFile =
-    builtins.listToAttrs (map (name: {
+  xdg.configFile = builtins.listToAttrs (
+    map (name: {
       name = name;
       value = {
         source = create_symlink "${dotfiles}/${name}";
         recursive = true;
       };
-    }) configs);
+    }) configs
+  );
 }

@@ -2,7 +2,10 @@ pragma Singleton
 import QtQuick
 
 QtObject {
-	<* for name, value in colors *>
-		readonly property color {{name}}: "{{value.default.hex}}"
-	<* endfor *>
+    property var md3: ({
+    <* for name, value in colors *>
+        {{ name }}: "{{ value.default.hex }}",
+    <* endfor *>
+    })
+
 }

@@ -54,7 +54,7 @@ hl.on("hyprland.start", function()
     hl.exec_cmd("nm-applet")
     hl.exec_cmd(browser)
     hl.exec_cmd(reload_waybar)
-    hl.exec_cmd("swww-daemon")
+    hl.exec_cmd("awww-daemon")
     hl.exec_cmd("hyprctl dispatch workspace 1")
     hl.exec_cmd("swaync")
     hl.exec_cmd("wl-paste --watch clipman store")
@@ -321,7 +321,7 @@ hl.bind(mainMod .. " + down", hl.dsp.focus({ direction = "down" }))
 for i = 1, 10 do
     local key = i % 10 -- 10 maps to key 0
     hl.bind(mainMod .. " + " .. key, hl.dsp.focus({ workspace = i }))
-    hl.bind(mainMod .. " + CTRL + " .. key, hl.dsp.focus({workspace = i + 10 }))
+    hl.bind(mainMod .. " + CTRL + " .. key, hl.dsp.focus({ workspace = i + 10 }))
     hl.bind(mainMod .. " + SHIFT + " .. key, hl.dsp.window.move({ workspace = i }))
     hl.bind(mainMod .. " + ALT + " .. key, hl.dsp.window.move({ workspace = i + 10 }))
 end
