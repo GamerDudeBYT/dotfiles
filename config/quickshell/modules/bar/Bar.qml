@@ -61,7 +61,6 @@ PanelWindow {
                     }
 
                     Rectangle {
-                        id: workspaces_bottom_border
                         height: 3
                         anchors.bottom: parent.bottom
                         anchors.left: parent.left
