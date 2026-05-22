@@ -40,7 +40,7 @@ PanelWindow {
             }
             spacing: 1
             Repeater {
-                model: Hyprland.workspaces
+                model: Hyprland.workspaces // could just do 10 to show 10 workspaces (need to make it work for the other monitors)
                 Rectangle {
                     width: 25
                     height: 55
@@ -53,7 +53,7 @@ PanelWindow {
                     }
                     Text {
                         anchors.fill: parent
-                        text: modelData.active ? "" : ""
+                        text: modelData.active ? "" : "" // Need to find a way to get the other properties that waybar has (not necessary but nice)
                         color: Colors.md3.secondary
                         font.pixelSize: 16
                         horizontalAlignment: Text.AlignHCenter
