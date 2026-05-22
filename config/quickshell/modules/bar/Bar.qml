@@ -48,7 +48,7 @@ PanelWindow {
                     MouseArea {
                         anchors.fill: parent
                         onClicked: {
-                            Hyprland.dispatch("workspaces" + modelData.id);
+                            Hyprland.dispatch("workspace " + modelData.id);
                         }
                     }
                     Text {
