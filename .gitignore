@@ -7,5 +7,5 @@ config/swaync/colors.css
 config/btop/themes/matugen.theme
 config/cava/themes/matugen-theme
 config/ghostty/themes/Matugen
-config/quickshell/colors.qml
+config/quickshell/Colors.qml
 config/zed/themes/matugen.json
