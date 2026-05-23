@@ -90,7 +90,7 @@ in
         inputs.awww.packages.${pkgs.stdenv.hostPlatform.system}.awww
       ];
       text = ''
-        matugen image "$1"
+        matugen image "$1" --source-color-index 0
         notify-send "Wallpaper Changed" "$1"
       '';
     })
