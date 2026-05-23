@@ -93,6 +93,8 @@ Rectangle {
             if (!data) return
             const args = data.split(",")
 
+            console.log(`Raw Event: ${name} | ${data}`);
+
             if (name === "focusedmonv2") {
                 isThisMonitorFocused = (monitor && monitor.name === args[0])
                 if (isThisMonitorFocused) {
