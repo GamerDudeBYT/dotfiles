@@ -4,105 +4,105 @@ import QtQuick
 QtObject {
     property var md3: ({
     
-        background: "#111418",
+        background: "#18120c",
     
         error: "#ffb4ab",
     
         error_container: "#93000a",
     
-        inverse_on_surface: "#2e3135",
+        inverse_on_surface: "#372f27",
     
-        inverse_primary: "#36618e",
+        inverse_primary: "#825513",
     
-        inverse_surface: "#e1e2e8",
+        inverse_surface: "#eee0d4",
     
-        on_background: "#e1e2e8",
+        on_background: "#eee0d4",
     
         on_error: "#690005",
     
         on_error_container: "#ffdad6",
     
-        on_primary: "#003258",
+        on_primary: "#472a00",
     
-        on_primary_container: "#d1e4ff",
+        on_primary_container: "#ffddb8",
     
-        on_primary_fixed: "#001d36",
+        on_primary_fixed: "#2a1700",
     
-        on_primary_fixed_variant: "#194975",
+        on_primary_fixed_variant: "#653e00",
     
-        on_secondary: "#253140",
+        on_secondary: "#3f2d17",
     
-        on_secondary_container: "#d7e3f7",
+        on_secondary_container: "#fcddbd",
     
-        on_secondary_fixed: "#101c2b",
+        on_secondary_fixed: "#281805",
     
-        on_secondary_fixed_variant: "#3b4858",
+        on_secondary_fixed_variant: "#57432b",
     
-        on_surface: "#e1e2e8",
+        on_surface: "#eee0d4",
     
-        on_surface_variant: "#c3c7cf",
+        on_surface_variant: "#d4c4b5",
     
-        on_tertiary: "#3b2948",
+        on_tertiary: "#273513",
     
-        on_tertiary_container: "#f2daff",
+        on_tertiary_container: "#d7e9b8",
     
-        on_tertiary_fixed: "#251431",
+        on_tertiary_fixed: "#131f02",
     
-        on_tertiary_fixed_variant: "#523f5f",
+        on_tertiary_fixed_variant: "#3d4b27",
     
-        outline: "#8d9199",
+        outline: "#9c8e80",
     
-        outline_variant: "#43474e",
+        outline_variant: "#504539",
     
-        primary: "#a0cafd",
+        primary: "#f8bb71",
     
-        primary_container: "#194975",
+        primary_container: "#653e00",
     
-        primary_fixed: "#d1e4ff",
+        primary_fixed: "#ffddb8",
     
-        primary_fixed_dim: "#a0cafd",
+        primary_fixed_dim: "#f8bb71",
     
         scrim: "#000000",
     
-        secondary: "#bbc7db",
+        secondary: "#dfc2a2",
     
-        secondary_container: "#3b4858",
+        secondary_container: "#57432b",
     
-        secondary_fixed: "#d7e3f7",
+        secondary_fixed: "#fcddbd",
     
-        secondary_fixed_dim: "#bbc7db",
+        secondary_fixed_dim: "#dfc2a2",
     
         shadow: "#000000",
     
-        source_color: "#5e88b8",
+        source_color: "#837669",
     
-        surface: "#111418",
+        surface: "#18120c",
     
-        surface_bright: "#36393e",
+        surface_bright: "#403830",
     
-        surface_container: "#1d2024",
+        surface_container: "#251e17",
     
-        surface_container_high: "#272a2f",
+        surface_container_high: "#302921",
     
-        surface_container_highest: "#32353a",
+        surface_container_highest: "#3b332b",
     
-        surface_container_low: "#191c20",
+        surface_container_low: "#211a13",
     
-        surface_container_lowest: "#0b0e13",
+        surface_container_lowest: "#130d07",
     
-        surface_dim: "#111418",
+        surface_dim: "#18120c",
     
-        surface_tint: "#a0cafd",
+        surface_tint: "#f8bb71",
     
-        surface_variant: "#43474e",
+        surface_variant: "#504539",
     
-        tertiary: "#d6bee4",
+        tertiary: "#bbcd9e",
     
-        tertiary_container: "#523f5f",
+        tertiary_container: "#3d4b27",
     
-        tertiary_fixed: "#f2daff",
+        tertiary_fixed: "#d7e9b8",
     
-        tertiary_fixed_dim: "#d6bee4",
+        tertiary_fixed_dim: "#bbcd9e",
     
     })
 

@@ -2,14 +2,12 @@
 import QtQuick
 import Quickshell
 import Quickshell.Wayland
-
 import "./modules/bar/"
 
 ShellRoot {
     id: root
-
-    Loader {
-        active: true
-        sourceComponent: Bar {}
+    Variants {
+        model: Quickshell.screens
+        delegate: Bar {}
     }
 }

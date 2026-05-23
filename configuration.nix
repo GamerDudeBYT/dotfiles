@@ -109,6 +109,9 @@
 
   services.printing.enable = true;
 
+  services.gvfs.enable = true;
+  services.samba.enable = true;
+
   services.pulseaudio.enable = false;
   security.rtkit.enable = true;
   services.pipewire = {
