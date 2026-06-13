@@ -1,147 +1,138 @@
 import QtQuick
+import Quickshell
 import Quickshell.Hyprland
-import "../../../"
+import "../../../" // Assuming Colors is defined here
 
 Rectangle {
     id: root
     required property string fontFamily
     required property var monitor
+
     property real padV: 5
     property real padH: 15
     property real maxWidth: 400
+
     width: Math.min(titleLabel.implicitWidth + padH * 2, maxWidth)
     height: titleLabel.implicitHeight + padV * 2
     color: Colors.md3.on_primary
 
-    property string windowTitle: "Desktop"
-    property var workspaceActiveWindow: ({})
-    property bool isThisMonitorFocused: false
+    property string currentTitle: "Desktop"
+    property string activeAddress: ""
 
-    function isWindowOnThisMonitor(address) {
-        if (!monitor || !monitor.activeWorkspace) return false
-        return monitor.activeWorkspace.toplevels.values.some(w => w.address === address)
+    // THE FIX: Bringing back the workspace memory cache
+    property var addressCache: ({})
+
+    function isWindowOnThisWorkspace(address) {
+        if (!monitor || !monitor.activeWorkspace)
+            return false;
+        const toplevels = monitor.activeWorkspace.toplevels.values;
+        return toplevels.some(w => w.address === address);
     }
 
-    function resolveTitle(address) {
+    function updateTitleFallback() {
         if (!monitor || !monitor.activeWorkspace) {
-            windowTitle = "Desktop"
-            return
+            currentTitle = "Desktop";
+            activeAddress = "";
+            return;
         }
-        const windows = monitor.activeWorkspace.toplevels.values
-        if (address) {
-            const target = windows.find(w => w.address === address)
+
+        const wsId = monitor.activeWorkspace.id;
+        const toplevels = monitor.activeWorkspace.toplevels.values;
+        const cachedAddr = addressCache[wsId];
+
+        // 1. Try the cached memory first (Fixes the switch-back bug)
+        if (cachedAddr) {
+            const target = toplevels.find(w => w.address === cachedAddr);
             if (target) {
-                windowTitle = target.title || "Desktop"
-                return
+                currentTitle = target.title || "Desktop";
+                activeAddress = target.address;
+                return;
             }
         }
-        const localActive = monitor.activeWorkspace.activeWindow
-        if (localActive) {
-            windowTitle = localActive.title || "Desktop"
-            return
-        }
-        if (windows && windows.length > 0) {
-            windowTitle = windows[0].title || "Desktop"
-            return
-        }
-        windowTitle = "Desktop"
-    }
 
-    function refreshFromCurrentWorkspace() {
-        if (!monitor || !monitor.activeWorkspace) {
-            windowTitle = "Desktop"
-            return
+        // 2. Try Quickshell's active window property
+        const active = monitor.activeWorkspace.activeWindow;
+        if (active && active.title) {
+            currentTitle = active.title;
+            activeAddress = active.address;
+
+            // Save to cache (Object.assign forces QML to notice the update)
+            const newCache = Object.assign({}, addressCache);
+            newCache[wsId] = active.address;
+            addressCache = newCache;
+            return;
         }
-        const wsId = monitor.activeWorkspace.id
-        const remembered = workspaceActiveWindow[wsId]
-        if (remembered) {
-            resolveTitle(remembered)
+
+        // 3. Fallback to first available window if no active window is found
+        if (toplevels && toplevels.length > 0) {
+            currentTitle = toplevels[0].title || "Desktop";
+            activeAddress = toplevels[0].address;
+
+            // Save fallback to cache
+            const newCache = Object.assign({}, addressCache);
+            newCache[wsId] = toplevels[0].address;
+            addressCache = newCache;
         } else {
-            const active = monitor.activeWorkspace.activeWindow
-            resolveTitle(active ? active.address : "")
+            currentTitle = "Desktop";
+            activeAddress = "";
         }
     }
 
-    Component.onCompleted: {
-        if (monitor) {
-            isThisMonitorFocused = Hyprland.focusedMonitor
-                ? Hyprland.focusedMonitor.name === monitor.name
-                : false
-        }
-        refreshFromCurrentWorkspace()
-    }
+    Component.onCompleted: updateTitleFallback()
 
     Connections {
         target: monitor
         function onActiveWorkspaceChanged() {
-            workspaceRefreshTimer.restart()
+            updateTitleFallback();
         }
     }
 
-    Timer {
-        id: workspaceRefreshTimer
-        interval: 16
-        repeat: false
-        onTriggered: refreshFromCurrentWorkspace()
+    Connections {
+        target: monitor && monitor.activeWorkspace ? monitor.activeWorkspace.toplevels : null
+        function onRowsInserted() {
+            updateTitleFallback();
+        }
+        function onRowsRemoved() {
+            updateTitleFallback();
+        }
+        function onDataChanged() {
+            updateTitleFallback();
+        }
     }
 
     Connections {
         target: Hyprland
         function onRawEvent(event) {
-            const name = event.name
-            const data = event.data
-            if (!data) return
-            const args = data.split(",")
+            const name = event.name;
+            const data = event.data;
+            if (!data)
+                return;
 
-            console.log(`Raw Event: ${name} | ${data}`);
-
-            if (name === "focusedmonv2") {
-                isThisMonitorFocused = (monitor && monitor.name === args[0])
-                if (isThisMonitorFocused) {
-                    workspaceRefreshTimer.restart()
-                }
-            }
+            const args = data.split(",");
 
             if (name === "activewindowv2") {
-                if (!isThisMonitorFocused || !isWindowOnThisMonitor(args[0])) return
-                const addr = args[0]
-                if (monitor.activeWorkspace) {
-                    const wsId = monitor.activeWorkspace.id
-                    const map = Object.assign({}, workspaceActiveWindow)
-                    map[wsId] = addr
-                    workspaceActiveWindow = map
+                if (isWindowOnThisWorkspace(args[0])) {
+                    activeAddress = args[0];
+
+                    // Update cache for this workspace when a new window gets focused
+                    if (monitor.activeWorkspace) {
+                        const wsId = monitor.activeWorkspace.id;
+                        const newCache = Object.assign({}, addressCache);
+                        newCache[wsId] = args[0];
+                        addressCache = newCache;
+                    }
+
+                    const target = monitor.activeWorkspace.toplevels.values.find(w => w.address === args[0]);
+                    if (target)
+                        currentTitle = target.title || "Desktop";
                 }
-                resolveTitle(addr)
             }
 
             if (name === "windowtitlev2") {
-                if (!monitor || !monitor.activeWorkspace) return
-                const wsId = monitor.activeWorkspace.id
-                const current = workspaceActiveWindow[wsId]
-                if (args[0] === current) resolveTitle(args[0])
-            }
-
-            if (name === "workspacev2") {
-                if (monitor && monitor.activeWorkspace &&
-                    monitor.activeWorkspace.id === args[0]) {
-                    workspaceRefreshTimer.restart()
-                }
-            }
-
-            if (name === "closewindow") {
-                const closed = args[0]
-                const map = Object.assign({}, workspaceActiveWindow)
-                for (const wsId in map) {
-                    if (map[wsId] === closed) delete map[wsId]
-                }
-                workspaceActiveWindow = map
-                workspaceRefreshTimer.restart()
-            }
-
-            if (name === "openwindow") {
-                if (monitor && monitor.activeWorkspace &&
-                    monitor.activeWorkspace.id === args[1]) {
-                    workspaceRefreshTimer.restart()
+                if (isWindowOnThisWorkspace(args[0])) {
+                    const target = monitor.activeWorkspace.toplevels.values.find(w => w.address === args[0]);
+                    if (target)
+                        currentTitle = target.title || "Desktop";
                 }
             }
         }
@@ -149,12 +140,13 @@ Rectangle {
 
     Text {
         id: titleLabel
-        text: root.windowTitle
+        text: root.currentTitle
         anchors.centerIn: parent
         font.family: root.fontFamily
         font.pixelSize: 16
         color: Colors.md3.primary
-        width: parent.width - parent.padH * 2
+        width: parent.width - (root.padH * 2)
         elide: Text.ElideRight
+        horizontalAlignment: Text.AlignHCenter
     }
 }
