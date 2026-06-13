@@ -105,12 +105,12 @@ PanelWindow {
                 }
                 spacing: 8
 
-                Text {
-                    text: "Right"
-                    color: Colors.md3.on_background
-                    verticalAlignment: Text.AlignVCenter
-                    anchors.verticalCenter: parent.verticalCenter
-                }
+                // Text {
+                //     text: "Right"
+                //     color: Colors.md3.on_background
+                //     verticalAlignment: Text.AlignVCenter
+                //     anchors.verticalCenter: parent.verticalCenter
+                // }
 
                 Network {
                     fontFamily: panel.fontFamily
